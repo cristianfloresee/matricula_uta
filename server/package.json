@@ -1,0 +1,18 @@
+{
+  "name": "matricula_uta",
+  "version": "1.0.0",
+  "description": "Ventana de Matriculas en Tiempo Real",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cristian Flores - Sebastian Lorca",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "oracledb": "^2.1.2",
+    "socket.io": "^2.0.4"
+  }
+}
