@@ -1,3 +1,16 @@
 <div style="background-color: green">
     <h3>Resumen</h3>
+
+    {{resumen_matriculados | json}}
+
+    <p>annioSelected: {{ annioSelected | json }}</p>
+    <p>sedeSelected: {{ sedeSelected | json }}</p>
+
+    <div *ngIf="resumen_matriculados[annioSelected].SEDES[sedeSelected] as resumen">
+        REGULAR: {{resumen.REGULAR }} INGRESO ESPECIAL: {{resumen.INGRESO_ESPECIAL }} OTROS INGRESOS: {{resumen.OTROS_INGRESOS }}
+        ANTIGUOS: {{resumen.ANTIGUOS }}
+    </div>
+
 </div>
+
+

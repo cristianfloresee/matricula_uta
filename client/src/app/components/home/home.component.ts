@@ -3,6 +3,9 @@ import { SocketService } from '../../services/socket.service';
 import { Chart } from 'chart.js';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts/ng2-charts';
+import { ResumenService } from "../../services/resumen.service";
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
 
 @Component({
     selector: 'app-home',
@@ -15,7 +18,7 @@ export class HomeComponent implements OnInit {
     resumen_matriculados;
     resumen_matriculados_nuevos;
 
-    resumenSelected: number;
+    annioSelected: number;
     sedeSelected: number;
 
     static_cities; //ELEMENTOS ESTATICOS COMO REFERENCIA PARA EL GRAFICO
@@ -80,13 +83,15 @@ export class HomeComponent implements OnInit {
     set_colors = [];
 
     //matriculasForm: FormGroup;
-
+    dato;
     constructor(
         private socketService: SocketService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private data: ResumenService
     ) {
 
-        this.resumen_matriculados = [
+
+        let response = [
             {
                 "ANNIO": 2018,
                 "SEDES": [
@@ -129,6 +134,8 @@ export class HomeComponent implements OnInit {
             }
         ];
 
+        this.data.setResumen(response);
+        
         /*
         this.matriculasForm = new FormGroup({
             resumen: new FormControl(this.resumen_matriculados[0]),
@@ -137,13 +144,15 @@ export class HomeComponent implements OnInit {
         console.log("neen: ", this.matriculasForm.value.resumen.SEDES[0]);
         */
 
-        this.resumenSelected = 0;
-        this.sedeSelected = 0;
+      
 
     }
 
     ngOnInit() {
         //this.initIoConnection();
+        this.data.current_resumen.subscribe(data_resumen => this.resumen_matriculados = data_resumen)
+        this.data.current_annio.subscribe(annio => this.annioSelected = annio)
+        this.data.current_sede.subscribe(sede => this.sedeSelected = sede)
     }
 
     private initIoConnection(): void {
@@ -193,13 +202,18 @@ export class HomeComponent implements OnInit {
             })
     }
 
-    resetSede(){
-        this.sedeSelected = 0;
+    changeAnnio(){
+        this.data.setAnnio(this.annioSelected)
+        this.data.setSede(0);
+    }
+
+    changeSede(){
+        this.data.setSede(this.sedeSelected);
     }
 
     shuffle() {
       
-        this.resumen_matriculados = [
+        let random = [
             {
                 "ANNIO": 2018,
                 "SEDES": [
@@ -241,7 +255,8 @@ export class HomeComponent implements OnInit {
                 ]
             }
         ];
-        console.log("nuevo objeto: ", this.resumen_matriculados);
+        this.data.setResumen(random);
+        console.log("nuevo objeto: ", random);
 
       
     }

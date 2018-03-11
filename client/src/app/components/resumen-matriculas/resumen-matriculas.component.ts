@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResumenService } from "../../services/resumen.service";
 
 @Component({
   selector: 'app-resumen-matriculas',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResumenMatriculasComponent implements OnInit {
 
-  constructor() { }
+  resumen_matriculados;
+  annioSelected;
+  sedeSelected;
+  constructor(private data: ResumenService) { }
 
   ngOnInit() {
+    this.data.current_resumen.subscribe(resumen => this.resumen_matriculados = resumen)
+    this.data.current_annio.subscribe(annio => this.annioSelected = annio)
+    this.data.current_sede.subscribe(sede => this.sedeSelected = sede)
   }
 
 }

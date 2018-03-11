@@ -16,6 +16,7 @@ import { TransitionGroupComponent, TransitionGroupItemDirective } from './transi
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResumenMatriculasComponent } from './components/resumen-matriculas/resumen-matriculas.component';
 import { AlumnosNuevosComponent } from './components/alumnos-nuevos/alumnos-nuevos.component';
+import { ResumenService } from './services/resumen.service';
 
 
 
@@ -36,7 +37,7 @@ import { AlumnosNuevosComponent } from './components/alumnos-nuevos/alumnos-nuev
     AppRoutingModule,
     ChartsModule
   ],
-  providers: [SocketService],
+  providers: [SocketService, ResumenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

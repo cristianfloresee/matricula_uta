@@ -3,8 +3,19 @@
         <div class="jumbotron">
             <h1>Matriculas UTA</h1>
         </div>
+        <div>
+            <nav>
+                <div>
+                   <a [routerLink]="['/resumen']">Resumen</a> 
+                </div>
+                <div>
+                    <a [routerLink]="['/nuevos']">Nuevos</a> 
+                 </div>
+            </nav>
+        </div>
     </div>
 
+    
     <!--
 <form [formGroup]="matriculasForm">
     <label>AÑO</label>
@@ -29,28 +40,27 @@
     {{matriculasForm.value.sede.OTROS_INGRESOS}} ANTIGUOS: {{matriculasForm.value.sede.ANTIGUOS}}
 </div>
 -->
-    <div>
+    <div *ngIf="annioSelected!=null && sedeSelected!=null">
 
         <button (click)="shuffle()">
             Cambiar Valores
         </button>
+        <br>
         <label>AÑO</label>
-        <select [(ngModel)]="resumenSelected" (change)="resetSede()">
+        <select [(ngModel)]="annioSelected" (change)="changeAnnio()">
             <option *ngFor="let res of resumen_matriculados; let i=index" [ngValue]="i">{{ res.ANNIO }}</option>
         </select>
-        <p>resumenSelected: {{ resumenSelected | json }}</p>
+        
         <label>SEDE</label>
-        <select [(ngModel)]="sedeSelected">
-            <option *ngFor="let sede of resumen_matriculados[resumenSelected].SEDES; let j=index" [ngValue]="j">{{ sede.SEDE }}</option>
+        <select [(ngModel)]="sedeSelected" (change)="changeSede()">
+            <option *ngFor="let sede of resumen_matriculados[annioSelected].SEDES; let j=index" [ngValue]="j">{{ sede.SEDE }}</option>
         </select>
-        <p>sedeSelected: {{ sedeSelected | json }}</p>
+        
 
-        <div *ngIf="resumen_matriculados[resumenSelected].SEDES[sedeSelected] as resumen">
-            REGULAR: {{resumen.REGULAR }} INGRESO ESPECIAL: {{resumen.INGRESO_ESPECIAL }} OTROS INGRESOS: {{resumen.OTROS_INGRESOS }}
-            ANTIGUOS: {{resumen.ANTIGUOS }}
-        </div>
+        
     </div>
-
+    <p>annioSelected: {{ annioSelected | json }}</p>
+    <p>sedeSelected: {{ sedeSelected | json }}</p>
 
 
 </div>
