@@ -1,0 +1,22 @@
+.jumbotron {
+    margin-top: 20px;
+}
+
+.flip-list-move {
+    transition: transform .8s;
+
+    animation: colorchange .8s; 
+    -webkit-animation: colorchange .8s; /* Chrome and Safari */
+}
+
+@keyframes colorchange
+{
+  0%   {background: #c8e6c9;}
+  100%   {background: #fbfffc;}
+}
+
+@-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+{
+  0%   {background: #c8e6c9;}
+  100%   {background: #fbfffc;}
+}

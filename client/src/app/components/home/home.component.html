@@ -1,0 +1,99 @@
+<div style="background-color: red">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Matriculas UTA</h1>
+        </div>
+    </div>
+
+    <!--
+<form [formGroup]="matriculasForm">
+    <label>AÑO</label>
+    <select formControlName="resumen" (change)="onSelect()">
+        <option *ngFor="let resumen of resumen_matriculados" [ngValue]="resumen">
+            {{resumen.ANNIO}}
+        </option>
+    </select>
+
+    <label>SEDE</label>
+    <select formControlName="sede">
+        <option *ngFor="let sede of matriculasForm.value.resumen.SEDES" [ngValue]="sede">
+            {{sede.SEDE}}
+        </option>
+    </select>
+
+</form>
+<p>FormGroup: {{ matriculasForm.value | json }}</p>
+<p>FormGroup: {{ matriculasForm.value.resumen.SEDES | json }}</p>
+<div>
+    REGULAR: {{matriculasForm.value.sede.REGULAR}} INGRESO ESPECIAL: {{matriculasForm.value.sede.INGRESO_ESPECIAL}} OTROS INGRESOS:
+    {{matriculasForm.value.sede.OTROS_INGRESOS}} ANTIGUOS: {{matriculasForm.value.sede.ANTIGUOS}}
+</div>
+-->
+    <div>
+
+        <button (click)="shuffle()">
+            Cambiar Valores
+        </button>
+        <label>AÑO</label>
+        <select [(ngModel)]="resumenSelected" (change)="resetSede()">
+            <option *ngFor="let res of resumen_matriculados; let i=index" [ngValue]="i">{{ res.ANNIO }}</option>
+        </select>
+        <p>resumenSelected: {{ resumenSelected | json }}</p>
+        <label>SEDE</label>
+        <select [(ngModel)]="sedeSelected">
+            <option *ngFor="let sede of resumen_matriculados[resumenSelected].SEDES; let j=index" [ngValue]="j">{{ sede.SEDE }}</option>
+        </select>
+        <p>sedeSelected: {{ sedeSelected | json }}</p>
+
+        <div *ngIf="resumen_matriculados[resumenSelected].SEDES[sedeSelected] as resumen">
+            REGULAR: {{resumen.REGULAR }} INGRESO ESPECIAL: {{resumen.INGRESO_ESPECIAL }} OTROS INGRESOS: {{resumen.OTROS_INGRESOS }}
+            ANTIGUOS: {{resumen.ANTIGUOS }}
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<!--
+<div style="width: 100%">
+    <div class="col-md-7 col-xs-7" *ngIf="chart_ready" style="text-align: center;">
+
+        <div style="display: block" style="margin: auto; width: 100%;">
+            <canvas baseChart #baseChart="base-chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [colors]="barChartColors" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+        </div>
+    </div>-->
+<!--
+    <div class="izquierda descripcion">
+        <h1>dfd</h1>
+    </div>
+    <div class="col-md-5 col-xs-5">
+        <table *ngIf="cities" class="table">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>City</th>
+                    <th>Votes</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody id="table" [transition-group]="'flip-list'">
+                <tr [id]="i" *ngFor="let city of cities; let i=index;" transition-group-item>
+                    <td>
+                        <div [style.backgroundColor]="city.COLOR" style="height: 10px; width: 30px;"></div>
+                    </td>
+                    <td>{{city.NAME}}</td>
+                    <td>{{city.VOTES}}</td>
+                    <td>
+                        <a class="btn btn-default" role="button" (click)="postVote(city.ID)">
+                            <span class="glyphicon glyphicon-arrow-up"></span> Upvote!
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>-->
